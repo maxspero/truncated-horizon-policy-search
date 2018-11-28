@@ -1,6 +1,5 @@
-demonstrations_10k
-.ipynb_checkpoints/
-venv/
 estimator*.pkl
+demonstrations_10k
+venv/
 __pycache__/
-
+.ipynb_checkpoints/

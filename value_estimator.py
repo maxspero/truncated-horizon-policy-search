@@ -1,19 +1,18 @@
-from sklearn.linear_model import SGDRegressor
 
-class Estimator():
+
+class ValueEstimator():
     """
     Value Function approximator. 
+    Scaler must implement .transform function transforming array of states to array of scaled states
+    Featurizer must implement .transform function transforming array of scaled states to array of featurized states
+    Model must implement sklearn .predict and .partial_fit functions 
     """
     
-    def __init__(self, scaler, featurizer):
-        self.model = SGDRegressor(learning_rate="constant")
-        # We need to call partial_fit once to initialize the model
-        # or we get a NotFittedError when trying to make a prediction
-        # This is quite hacky.
+    def __init__(self, scaler, featurizer, model):
         self.scaler = scaler
         self.featurizer = featurizer
-        self.model.partial_fit([self.featurize_state(s_arr[0,:])], [0])
-    
+        self.model = model
+
     def featurize_state(self, state):
         """
         Returns the featurized representation for a state.
@@ -22,7 +21,7 @@ class Estimator():
         featurized = self.featurizer.transform(scaled)
         return featurized[0]
     
-    def predict(self, s):
+    def value(self, s):
         """
         Makes value function predictions.
         """
