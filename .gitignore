@@ -1,5 +1,7 @@
-estimator*.pkl
-demonstrations_10k
 venv/
 __pycache__/
 .ipynb_checkpoints/
+.DS_Store
+demonstrations_10k
+swimmer_demonstrations_10k
+estimator*.pkl
